@@ -1,7 +1,4 @@
-# this method won't be used, it's just for testing rspec
-def hello
-    return 'hello world'
-end
+require_relative('validators')
 
 def welcome_and_input()
     system('clear')
@@ -12,11 +9,20 @@ def welcome_and_input()
     puts '3. Make a deposit'
     puts '4. Exit'
 
-    input = gets.chomp.to_i
+    input = gets.chomp
+    input_valid = Validators.validate_input(input)
+    if !input_valid
+        #print error message for invalid input then reprint welcome
+        puts 'Invalid input. Please enter a number from 1-4'
+        puts 'Press enter to continue'
+        gets
+        welcome_and_input()
+    end
 
     case input
     when 1
         # show balance
+        show_balance()
     when 2
         # make a withdrawal
     when 3
@@ -26,11 +32,6 @@ def welcome_and_input()
         puts 'Goodbye! Thank you for banking with us.'
         system('exit')
     else
-        #print error message for invalid input then reprint welcome
-        puts 'Invalid input. Please enter a number from 1-4'
-        puts 'press enter to continue'
-        gets
-        welcome_and_input()
     end
 end
 
