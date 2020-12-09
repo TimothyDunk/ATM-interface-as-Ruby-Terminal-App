@@ -13,16 +13,25 @@ def welcome_and_input()
     when 1
         # show balance
         show_balance()
+        puts "Press enter to continue."
+        gets
+        welcome_and_input()
     when 2
         # make a withdrawal
         show_balance()
         withdraw()
         show_balance()
+        puts "Press enter to continue."
+        gets
+        welcome_and_input()
     when 3
         # make a deposit
         show_balance()
         deposit()
         show_balance()
+        puts "Press enter to continue."
+        gets
+        welcome_and_input()
     when 4
         # exit
         puts 'Goodbye! Thank you for banking with us.'
@@ -41,7 +50,7 @@ def show_balance()
         if bank_balance <= 0 
             puts "You have no money."
         else
-            puts "Your bank balance is #{bank_balance}"
+            puts "Your bank balance is $#{bank_balance}"
             return bank_balance
         end
     end
@@ -49,7 +58,7 @@ end
 
 # minus number from balance txt file
 def withdraw()
-    print "How much money would you like to withdraw? "
+    print "How much money would you like to withdraw? $"
     withdrawal_amount = gets.chomp.to_i
     bank_balance = 0
     File.open("balance.txt").each do |line|
@@ -63,7 +72,7 @@ end
 
 # add number to balance txt file
 def deposit()
-    print "How much money would you like to deposit? "
+    print "How much money would you like to deposit? $"
     deposit_amount = gets.chomp.to_i
     bank_balance = 0
     File.open("balance.txt").each do |line|
